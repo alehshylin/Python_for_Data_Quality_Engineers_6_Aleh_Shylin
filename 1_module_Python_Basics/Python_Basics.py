@@ -21,16 +21,16 @@ print(random_numbers_list, '\n')
 # Home task №2 - sort list from min to max (without using sort())
 
 # To sort list I use bubble sort algorithm. This algorithm takes first element and compare it with second.
-# If second element is greater than the second, then they switch position between each other. This operation performs
+# If first element is greater than the second, then they switch position between each other. This operation performs
 # for each element.
 # I use two for... statements to make sure that all elements are sorted correctly. As for range() method value I take
-# length of the list by len() method. In that case even if the biggest element will be at the 1 position,
+# length of the list by len() method. In that case even if the biggest element was at the 1 position,
 # in the end of the sorting that element will be at the last position
 for j in range(len(random_numbers_list)):
     # In this for... statement I take value-1 for range() method because I want to access element with position
     # in the list +1. If I not perform -1 operation then I will get error: list index if out of the range
     for i in range(len(random_numbers_list) - 1):
-        # In the line 31 I compare first element with the next one. If first element is greater than the next one, then
+        # In the line 35 I compare first element with the next one. If first element is greater than the next one, then
         # we perform next operations.
         if random_numbers_list[i] > random_numbers_list[i+1]:
             # in this section we swap elements by the help of the temporary variable
