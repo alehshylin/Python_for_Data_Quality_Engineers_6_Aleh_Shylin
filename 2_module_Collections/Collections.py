@@ -54,12 +54,15 @@ for i in range(len(list_with_dicts)):
         # In this case I parse keys from list with true keys and convert them to one symbol (i.e. from 'q_2' to 'q')
         for j in range(len(result_dict_keys)):
             result_dict_keys_temporary[j] = result_dict_keys[j][:1]
-        # I perform the convertation to one symbol for this if... statement. Because all keys from old dict are as one symbol
+        # I perform the convertation to one symbol for this if... statement.
+        # Because all keys from old dict are as one symbol. And if key from old dict is in the list of new dict keys
+        # we perform next steps
         if key in result_dict_keys_temporary:
-            # I take index from dict_keys list to send it to the dict_values list because one position in both list
-            # corresponds to the one key:value pars in the dict
+            # I take index from 'result_dict_keys' list to send it to the 'result_dict_values' list because
+            # one position in both list corresponds to the one key:value pars in the dict
             result_dict_index = result_dict_keys_temporary.index(key)
-            # If key already exists in the new dict, we compare values from old dict and the new dict.
+            # If key already exists in the new dict (i.e. that key exists in the list 'result_dict_keys'), we compare
+            # values from old dict and the new dict (we take values from list 'result_dict_values').
             if list_with_dicts[i][key] > result_dict_values[result_dict_index]:
                 # If value from the old dict is greater than value from new dict, we create key as key_{number_of_dict}.
                 # Please note, that dict numeration is going from 0.
@@ -68,11 +71,17 @@ for i in range(len(list_with_dicts)):
                 # And I rewrite values in all three lists
                 result_dict_keys[result_dict_index] = index_for_new_dict
                 result_dict_values[result_dict_index] = list_with_dicts[i][key]
+                # I perform operation in the line 76 to make sure that length of the 'result_dict_keys_temporary' will
+                # be the same as length of the 'result_dict_keys' list.
                 result_dict_keys_temporary[result_dict_index] = index_for_new_dict
         else:
-            # If key doesn't exist in the new dict then we just add values to all three lists
+            # If key doesn't exist in the new dict (in the list 'result_dict_keys') then we just add values to all three lists
             result_dict_keys.append(key)
             result_dict_values.append(list_with_dicts[i][key])
+            # I perform operation in the line 85 to make sure that length of temporary list will be the same as the
+            # length of the main two lists (result_dict_keys and result_dict_values). That means that in each
+            # overwriting of the temporary list, values in this list will be in the same position
+            # (will have the same index), as values in the list 'result_dict_keys'
             result_dict_keys_temporary.append(key)
 
 # In this for... statement I parse lists with keys and values to create dict
