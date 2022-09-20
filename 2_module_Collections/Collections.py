@@ -34,7 +34,8 @@ for i in range(random.randint(2, 10)):
     list_with_dicts.append(temporary_dict)
 
 # Let's print our list
-print(list_with_dicts, '\n')
+print(f'\nHome task 1 - create a list of random number of dicts, result list: \n {list_with_dicts} \n')
+
 
 # Home task 2 - get previously generated list of dicts and create one common dict
 
@@ -84,9 +85,44 @@ for i in range(len(list_with_dicts)):
             # (will have the same index), as values in the list 'result_dict_keys'
             result_dict_keys_temporary.append(key)
 
+
+# Approach in the lines 94-121 does not change keys that is presented only once in the whole list from task 1. Only
+# those keys, that have duplicates (or you can call pars) in the list from task 1. As an example: we have a list
+# [{a:12,d:31,c:90,s:12,w:31}, {e:24,q:52,a:10,x:32,z:32}]. As a result, this approach will take only 'a' key and
+# transform it to the 'a_0':12. Other keys will not be transformed because there are unique in the list.
+
+# Firstly, let's create lists that will hold keys and their dict number
+result_dict_keys_temporary = []
+result_dict_dict_index_temporary = []
+
+# We parse list with dicts from task 1 in this for... statement
+for i in range(len(list_with_dicts)):
+    # We parse each dict by key
+    for key in list_with_dicts[i]:
+        # if key from old dicts (from task 1) is in the list of the keys of the new dict (that was partially created
+        # in the lines 51-85), then it means, that this key doesn't have dict number in the end (for example doesn't
+        # have '_4' symbol, only 'q'). And we work work these keys
+        if key in result_dict_keys:
+            # In the section from line 106 to line 121 we try to find keys which are repeated. If there are repeated,
+            # this means that first appended key has maximum value, others same keys will have less values.
+            if key not in result_dict_keys_temporary:
+                # If key is not yet in the temporary lists, we add it to the first list and dict number, from which
+                # this key is come to the second list
+                result_dict_keys_temporary.append(key)
+                result_dict_dict_index_temporary.append(i)
+            # When we find the same second key, we assumed, that first key has maximum value. And we perform next steps.
+            else:
+                # We find index of the first key with maximum values
+                key_index = result_dict_keys_temporary.index(key)
+                # And we rewrite key name in the list that was used for dict creation in the lines 51-91. For example
+                # from 'h' to 'h_5' if the first appearance of 'h' key was in the 6 dict in the list from 1 task and
+                # we have second (or third, of fourth and so on) appearance of the same 'h' key
+                result_dict_keys[result_dict_keys.index(key)] = str(key) + '_' + \
+                    str(result_dict_dict_index_temporary[key_index])
+
 # In this for... statement I parse lists with keys and values to create dict
 for i in range(len(result_dict_keys)):
     result_dict[result_dict_keys[i]] = result_dict_values[i]
 
 # Let's print our result dict
-print(result_dict)
+print(f'Home task 2 - create one dict with from list of dicts, result dict: \n {result_dict}')
