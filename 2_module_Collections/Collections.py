@@ -86,7 +86,7 @@ for i in range(len(list_with_dicts)):
             result_dict_keys_temporary.append(key)
 
 
-# Approach in the lines 94-118 does not change keys that is presented only once in the whole list from task 1. Only
+# Approach in the lines 94-119 does not change keys that is presented only once in the whole list from task 1. Only
 # those keys, that have duplicates (or you can call pars) in the list from task 1. As an example: we have a list
 # [{a:12,d:31,c:90,s:12,w:31}, {e:24,q:52,a:10,x:32,z:32}]. As a result, this approach will take only 'a' key and
 # transform it to the 'a_0':12. Other keys will not be transformed because there are unique in the list.
@@ -103,7 +103,7 @@ for i in range(len(list_with_dicts)):
         # in the lines 51-85), then it means, that this key doesn't have dict number in the end (for example doesn't
         # have '_4' symbol, only 'q'). And we work work these keys
         if key in result_dict_keys:
-            # In the section from line 102 to line 108 we try to find keys which are repeated. If there are repeated,
+            # In the section from line 106 to line 119 we try to find keys which are repeated. If there are repeated,
             # this means that first appended key has maximum value, others same keys will have less values.
             if key not in result_dict_keys_temporary:
                 result_dict_keys_temporary.append(key)
