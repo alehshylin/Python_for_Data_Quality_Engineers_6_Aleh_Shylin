@@ -24,9 +24,9 @@ homEwork:
 text_list = []
 
 # In this for... statement I parse original text to the list. I use dot symbol '.' as separator
-for text in variable_with_original_text.split('.'):
+for sentence in variable_with_original_text.split('.'):
     # And append sentence to the list
-    text_list.append(text)
+    text_list.append(sentence)
 
 # I create two variables: one for transformed text and another one for the last sentence that will be created by adding
 # of last words of each sentence
@@ -44,13 +44,13 @@ for i in range(len(text_list)-1):
     text_list[i] = text_list[i].lower()
     # Finally I transform first letter of the sentence to uppercase by method .capitalize().
     text_list[i] = text_list[i].capitalize()
-    # Then I correct expression 'iz' to 'is by replacing by method .sub() from library re. I do not use any regex
-    # patterns here because there is actually no need in that case. All misspelling happens in expression, not in the
-    # independent word (i.e. word like 'existing'). That's why I use spaces to avoid replacing in the words like
+    # Then I correct expression 'iz' to 'is' by replacing method .sub() from library re. I do not use any regex
+    # patterns here because there is actually no need in that case. All misspelling happens in independent expressions,
+    # not in the words (i.e. word like 'existing'). That's why I use only spaces to avoid replacing in the words like
     # 'normalize'.
     text_list[i] = re.sub(' iz ', ' is ', text_list[i])
     # I decide to replace also "iz" expression in the sentence 'fix“iZ” with correct “is”...' because I assume that
-    # this abbreviation is also incorrect. I do not combine replacement from line 51 and line 59 to one pattern because
+    # this expression is also incorrect. I do not combine replacement from line 51 and line 59 to one pattern because
     # of the next reason: I may create pattern like '\Wiz\W$' or '[^a-zA-Z0-9_]iz[^a-zA-Z0-9_]$'. That pattern
     # catch both 'iz' and '“iz”' expression, but in that case I need to understand what exactly pattern catch.
     # I can do it by if... elif... statements, but I think that for that case it will be code complication.
@@ -63,14 +63,14 @@ for i in range(len(text_list)-1):
     # end of the line character '^' to make sure that I not replace words that end to 'tex', but fortunately we don't
     # have such words in the original text. That's why I don't use this character
     text_list[i] = re.sub(r'tex$', 'text', text_list[i])
-    # Then I replace all double, triple and so on whitespaces between words to one whitespace
+    # Then I replace all double, triple and more whitespaces between words to one whitespace
     text_list[i] = re.sub(r'\s+', ' ', text_list[i])
     # Then I split each words to three variables. Variable 'first' contains first word of the sentence. Variable 'last'
     # contains the last word of the sentence. Variable (or it is better to say array or *args) '*middle' contains all
     # other words (we can say words that is not first and last in the sentence). We will work with 'last'
     # and 'middle' variables only.
     first, *middle, last = text_list[i].split()
-    # In the task requirements we need to create last sentence with last words. I assume that I need to use only rows.
+    # In the task requirements we need to create last sentence with last words. I assume that I need to use only words.
     # We have one sentence with the number in the end of the sentence. In that case we should take word before it.
     # To check if last expression of the sentence is number we can use method .isdigit().
     if not last.isdigit():
@@ -100,11 +100,11 @@ last_sentence += '.'
 final_text = final_text + last_sentence
 
 # And print it
-print('Transformed text with added last sentence:\n', final_text)
+print('\nTransformed text with added sentence:\n\n', final_text)
 
 # Also we need to count all whitespaces in the original text. To do this I use unicode combination that represents
-# whitespace symbol. Unfortunately, I count only 84 symbols. I also tried another unicode combination with property
-# of whitespace (you can find list here: http://xahlee.info/comp/unicode_whitespace.html) but almost all of them returns
-# 0, except of lines count. Maybe I incorrectly paste the original text, but for now, I don't know any solutions to
-# count 87 whitespaces
-print('Number of whitespaces from original text: ', variable_with_original_text.count('\u0020'))
+# whitespace symbol. Unfortunately, I count only 84 symbols. I also tried another unicode combinations with property
+# of whitespace (you can find list of unicode combinations here: http://xahlee.info/comp/unicode_whitespace.html) but
+# almost all of them returns 0, except of lines count. Maybe I incorrectly paste the original text, but for now,
+# I don't know any solutions to count 87 whitespaces
+print('\nNumber of whitespaces from original text:', variable_with_original_text.count('\u0020'))
