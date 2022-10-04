@@ -9,11 +9,11 @@ homEwork:
 
  
 
-  You NEED TO normalize it fROM letter CASEs point oF View. also, create one MORE senTENCE witH LAST WoRDS of each existING SENtence and add it to the END OF this Paragraph.
+  You NEED TO normalize it fROM letter CASEs point oF View? also, create one MORE senTENCE witH LAST WoRDS of each existING SENtence and add it to the END OF this Paragraph.
 
  
 
-  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE.
+  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE!
 
  
 
@@ -23,9 +23,12 @@ homEwork:
 # I create list to parse original text in it. Each element of this list stores one sentence from original text
 text_list = []
 
+# Create list with symbols that end sentences
+end_symbols = [word for word in variable_with_original_text if word in '\.|!|\?']
+
 # In this for... statement I parse original text to the list. There are possible separators. I assume, that sentence
-# ends with next symbols: '.', '..', '...', '!', '?'.
-for sentence in re.split('\.{1,3}|!|\?', variable_with_original_text):
+# ends with next symbols: '.', '!', '?'.
+for sentence in re.split('\.|!|\?', variable_with_original_text):
     # And append sentence to the list
     text_list.append(sentence)
 
@@ -68,9 +71,9 @@ for i in range(len(text_list)-1):
     # In the task requirements we need to create last sentence with last words. We just add value from 'last' variable
     # to our variable 'last_sentence' with a space
     last_sentence += last + ' '
-    # After all operations of original text transforming we add dot to each sentence, because we lost it when parsed
-    # original text
-    final_text += text_list[i] + '. '
+    # After all operations of original text transforming we add symbol from list end_symbols to each sentence,
+    # because we lost it when parsed original text. Each symbol from end_symbols list corresponds to its sentence
+    final_text += text_list[i] + end_symbols[i] + ' '
 
 # We still need to perform some operation with the last sentence. Firstly I delete all spaces from the start and the end
 # of the sentence
