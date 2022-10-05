@@ -234,6 +234,8 @@ homEwork:
                 is_upper_flag = 0
         text_index += 1
 
+    # In the line 239 I call the function sentence_transformation() that performs transformation of the sentence.
+    # After all, I take ready and beautiful sentence
     last_sentence = sentence_transformation(last_sentence)
     last_sentence += '.'
 
@@ -243,7 +245,7 @@ homEwork:
     return final_text, space_count
 
 
-# I call 2 function with main logic and take 2 arguments (final text and number of whitespaces) from it
+# I call function string_task() with main logic and take 2 arguments (final text and number of whitespaces) from it
 ready_text, final_count = string_task()
 # After all, I print final text and number of whitespaces in the original text
 print('\nTransformed text with added sentence:\n\n', ready_text)
