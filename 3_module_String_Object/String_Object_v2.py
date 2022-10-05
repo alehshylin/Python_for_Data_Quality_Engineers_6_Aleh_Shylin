@@ -5,7 +5,7 @@ import re
 variable_with_original_text = """
 homEwork:
 
-  tHis iz your homeWork, copy these Text to variable!
+  tHis iz your homeWork, copy these Text to variable.
 
 
 
@@ -13,7 +13,7 @@ homEwork:
 
 
 
-  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE?
+  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE
 
 
 
