@@ -150,21 +150,21 @@ def collections_task_2_2(result_dict_keys, result_dict_values, list_with_dicts):
 
 # Firstly we call function collections_task_1(). It generates list with dicts and return it. We collect this list to
 # variable 'result_list'
-result_list = collections_task_1()
-
-# Let's print our list
-print(f'\nHome task 1 - create a list of random number of dicts, result list: \n {result_list} \n')
-
-# Then we call function collections_task_2_1(). This function takes list with dicts as required parameter and returns
-# pre-ready keys and values. We store pre-ready keys in variable final_dict_keys and values in final_dict_values
-final_dict_keys, final_dict_values = collections_task_2_1(result_list)
-
-# At the end we call function collections_task_2_2(). This function takes pre-ready keys and values and list with dicts.
-# Function returns final dict and we store it in the variable final_dict
-final_dict = collections_task_2_2(final_dict_keys, final_dict_values, result_list)
-
-# Let's print our final dict
-print(f'Home task 2 - create one dict with from list of dicts, result dict: \n {final_dict} \n')
+# result_list = collections_task_1()
+#
+# # Let's print our list
+# print(f'\nHome task 1 - create a list of random number of dicts, result list: \n {result_list} \n')
+#
+# # Then we call function collections_task_2_1(). This function takes list with dicts as required parameter and returns
+# # pre-ready keys and values. We store pre-ready keys in variable final_dict_keys and values in final_dict_values
+# final_dict_keys, final_dict_values = collections_task_2_1(result_list)
+#
+# # At the end we call function collections_task_2_2(). This function takes pre-ready keys and values and list with dicts.
+# # Function returns final dict and we store it in the variable final_dict
+# final_dict = collections_task_2_2(final_dict_keys, final_dict_values, result_list)
+#
+# # Let's print our final dict
+# print(f'Home task 2 - create one dict with from list of dicts, result dict: \n {final_dict} \n')
 
 
 # Module 3 String Object
@@ -186,53 +186,65 @@ def sentence_transformation(sentence):
 def string_task():
 
     variable_with_original_text = """
-    homEwork:
+homEwork:
 
-        tHis iz your homeWork, copy these Text to variable.
-        
-        
-        
-        You NEED TO normalize it fROM letter CASEs point oF View. also, create one MORE senTENCE witH LAST WoRDS of each existING SENtence and add it to the END OF this Paragraph.
-        
-        
-        
-        it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE.
-        
-        
-        
-        last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87.
-    """
+  tHis iz your homeWork, copy these Text to variable.
 
-    text_list = []
+ 
 
-    for sentence in re.split('\.{1,3}|!|\?', variable_with_original_text):
-        text_list.append(sentence)
+  You NEED TO normalize it fROM letter CASEs point oF View. also, create one MORE senTENCE witH LAST WoRDS of each existING SENtence and add it to the END OF this Paragraph.
 
-    ready_text = ''
-    last_sentence = ''
+ 
 
-    for i in range(len(text_list) - 1):
-        # In the line 216 I call function with transformation logic and take prepared sentence from it
-        text_list[i] = sentence_transformation(text_list[i])
-        text_list[i] = re.sub(' iz ', ' is ', text_list[i])
-        text_list[i] = re.sub('“iz”', ' “iz” ', text_list[i])
-        text_list[i] = re.sub(r'tex$', 'text', text_list[i])
-        text_list[i] = re.sub(r'\s+', ' ', text_list[i])
-        first, *middle, last = text_list[i].split()
-        last_sentence += last + ' '
-        ready_text += text_list[i] + '. '
-    # In the line 225 I call function with transformation logic and take prepared sentence from it
-    last_sentence = sentence_transformation(last_sentence)
-    last_sentence += '.'
-    ready_text = ready_text + last_sentence
+  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE.
+
+ 
+
+  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87. """
 
     space_count = variable_with_original_text.count('\u0020')
-    # As a result, I return ready text and number of whitespaces
-    return ready_text, space_count
+
+    variable_with_original_text = variable_with_original_text.lower()
+    variable_with_original_text = variable_with_original_text.strip()
+    variable_with_original_text = re.sub(' iz ', ' is ', variable_with_original_text)
+    variable_with_original_text = re.sub('“iz”', ' “iz”', variable_with_original_text)
+    variable_with_original_text = re.sub('tex\.', 'text.', variable_with_original_text)
+
+    last_sentence = ''
+
+    for sentence in re.split('\.|!|\?', variable_with_original_text):
+        if (sentence != '\u0020') and (sentence != '\n') and (sentence != ''):
+            first, *middle, last = sentence.split()
+            last_sentence += last + ' '
+
+    final_text = ''
+    is_upper_flag = 0
+    text_index = 0
+
+    for letter in variable_with_original_text:
+        if is_upper_flag != 1:
+            if letter.isalpha():
+                is_upper_flag = 1
+                final_text += variable_with_original_text[text_index].capitalize()
+            else:
+                final_text += letter
+        else:
+            final_text += letter
+            if letter in r'\.|!|\?':
+                is_upper_flag = 0
+        text_index += 1
+
+    last_sentence = sentence_transformation(last_sentence)
+    last_sentence += '.'
+
+    final_text += ' ' + last_sentence
+
+    # And I just return final text and number of whitespaces in the initial text
+    return final_text, space_count
 
 
 # I call 2 function with main logic and take 2 arguments (final text and number of whitespaces) from it
-final_text, final_count = string_task()
+ready_text, final_count = string_task()
 # After all, I print final text and number of whitespaces in the original text
-print('\nTransformed text with added sentence:\n\n', final_text)
+print('\nTransformed text with added sentence:\n\n', ready_text)
 print('\nNumber of whitespaces from original text:', final_count)
