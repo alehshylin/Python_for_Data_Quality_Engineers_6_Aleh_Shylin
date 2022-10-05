@@ -13,15 +13,19 @@ homEwork:
 
 
 
-  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE
+  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE.
 
 
 
-  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87. """
+  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87. 
+  """
 
 
 # Firstly I transform all letters to lowercase by .lower() method.
 variable_with_original_text = variable_with_original_text.lower()
+# And just delete leading and trailing whitespaces from the main text. This does not change formatting of the initial
+# text
+variable_with_original_text = variable_with_original_text.strip()
 # Then I correct expression 'iz' to 'is' by replacing method .sub() from library re. I do not use any regex
 # patterns here because there is actually no need in that case. All misspelling happens in independent expressions,
 # not in the words (i.e. word like 'existing'). That's why I use only spaces to avoid replacing in the words like
@@ -97,7 +101,7 @@ last_sentence += '.'
 
 # After all operations of original text transforming we add symbol from list end_symbols to each sentence,
 # because we lost it when parsed original text. Each symbol from end_symbols list corresponds to its sentence
-final_text += last_sentence
+final_text += ' ' + last_sentence
 
 # And print it
 print('\nTransformed text with added sentence:\n\n', final_text)
