@@ -193,32 +193,32 @@ class UniqueAdd(NewsAdd):
         # Logic for headline creation remains the same as in the ahead classes. That's why I do not comment it
         if self.filepath.is_file():
             if file_flag == 'Yes':
-                with open(self.filename, 'w') as NewsFile:
+                with open(self.filename, 'w') as UniqueFile:
                     file_text = ['Unique message ------------------------------\n',
                                  f"Today is {datetime.now().strftime('%d %B, %Y')} \n",
                                  f"Average temperature in {city_text.capitalize()} for today is {average_temperature}\n",
                                  f"\nAnd today's horoscope for {zodiac_sign_text.capitalize()} zodiac sign is: \n"
                                  f"{zodiac_horoscope}",
                                  '\n---------------------------------------------\n\n\n']
-                    NewsFile.writelines(file_text)
+                    UniqueFile.writelines(file_text)
             elif file_flag == 'No':
-                with open(self.filename, 'a') as NewsFile:
+                with open(self.filename, 'a') as UniqueFile:
                     file_text = ['Unique message ------------------------------\n',
                                  f"Today is {datetime.now().strftime('%d %B, %Y')} \n",
                                  f"Average temperature in {city_text.capitalize()} for today is {average_temperature}\n",
                                  f"\nAnd today's horoscope for {zodiac_sign_text.capitalize()} zodiac sign is: \n"
                                  f"{zodiac_horoscope}",
                                  '\n---------------------------------------------\n\n\n']
-                    NewsFile.writelines(file_text)
+                    UniqueFile.writelines(file_text)
         else:
-            with open(self.filename, 'w') as NewsFile:
+            with open(self.filename, 'w') as UniqueFile:
                 file_text = ['Unique message ------------------------------\n',
                              f"Today is {datetime.now().strftime('%d %B, %Y')} \n",
                              f"Average temperature in {city_text.capitalize()} for today is {average_temperature}\n",
                              f"\nAnd today's horoscope for {zodiac_sign_text.capitalize()} zodiac sign is: \n"
                              f"{zodiac_horoscope}",
                              '\n---------------------------------------------\n\n\n']
-                NewsFile.writelines(file_text)
+                UniqueFile.writelines(file_text)
 
     # As in the NewsAdd, this method defines what user want to write. But we overwrite this method as method ahead to
     # define what city and zodiac sign user want to write
