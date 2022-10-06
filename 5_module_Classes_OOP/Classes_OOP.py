@@ -59,10 +59,10 @@ class NewsAdd:
                              '---------------------------------------------\n\n\n']
                 NewsFile.writelines(file_text)
 
-    # This method defines what News user want to write. After defying method calls method that create Headline and add
-    # it to the file. This is example of encapsulation: all execution operations performs in the other method and user
-    # does not see these operations. file_flag variable takes from the class, when user define what type of Add he/she
-    # wants to write
+    # This method defines what News user want to write. After defying of user News and City, this method calls method
+    # file_module() that create Headline and add it to the file. This is example of encapsulation: all execution
+    # operations performs in the other method and user does not see these operations. file_flag variable takes from
+    # the class, when user define what type of Add he/she wants to write
     def user_message(self, file_flag):
         # User write News
         news_text = input('\nPlease, write your News: \n')
@@ -110,29 +110,29 @@ class AdvAdd(NewsAdd):
                 AdvFile.writelines(file_text)
 
     # As in the NewsAdd, this method defines what user want to write. But we overwrite this method as method ahead to
-    # define what Adv user want to write
+    # define what Advertisement user want to write
     def user_message(self, file_flag):
         # User writes Adv
         adv_text = input('\nPlease, write your Advertisement: \n')
         # User writes date until Adv is active
         date_text = input('Please, write date, until which your advertisement will be active in format MM/DD/YYYY: \n')
-        # Date should be in one format, that's why check, how user writes date
+        # Date should be in specific format, that's why check, how user writes date
         try:
             # If user writes date not in the format MM/DD/YYYY
             datetime.strptime(date_text, '%m/%d/%Y')
         except ValueError:
             # Then we stop execution and raise an error
-            raise ValueError("\nError: Incorrect data format, please, write date in the format MM/DD/YYYY")
+            raise ValueError("Error: Incorrect data format, please, write date in the format MM/DD/YYYY")
         date_text = datetime.strptime(date_text, '%m/%d/%Y')
         # Date should be more than today's date. If not:
         while date_text <= datetime.today():
             # We raise self-made error and did not stop the execution
-            print(f"\nError: You entered date {date_text.strftime('%m/%d/%Y')} that less or equal that today's "
+            print(f"\nError: You entered date {date_text.strftime('%m/%d/%Y')} less or equal that today's "
                   f"date {datetime.today().strftime('%m/%d/%Y')}. Advertisement can be only with future dates.\n")
             # And ask to write date one more time
             date_text = input(
                 'Please, write date, until which your advertisement will be active in format MM/DD/YYYY: \n')
-            # If date is not in the necessary format we raise an error
+            # If date is not in the specific format we raise an error
             try:
                 datetime.strptime(date_text, '%m/%d/%Y')
             except ValueError:
@@ -150,11 +150,11 @@ class UniqueAdd(NewsAdd):
         NewsAdd.__init__(self)
         # And overwrite one variable from the NewsAdd class
         self.add_type = 'Unique'
-        # To work with geopy.geocoders module, we need to be registered at their site. variable user_agent requires user
-        # login. If user with this login is exists, then we can work with geopy.geocoders module.
+        # To work with geopy.geocoders module, we need to be registered at their site. Variable user_agent requires
+        # username. If user with this username is exists, then we can work with geopy.geocoders module.
         self.coordinates_method = Nominatim(user_agent='python_for_dqe')
 
-    # As in the NewsAdd, this method headline to the file. But we again overwrite this method from NewsAdd class.
+    # As in the NewsAdd, this method headline to the file. But again we overwrite this method from NewsAdd class.
     # In this state, method create headline that contains today's date, average temperature for the city that user
     # select, and horoscope for the zodiac sign that user select.
     def file_module(self, file_flag='No', city_text='Vilnius', zodiac_sign_text='gemini'):
@@ -165,7 +165,7 @@ class UniqueAdd(NewsAdd):
         zodiac_json = zodiac_response.json()
 
         # Because horoscope for zodiac sign can be too big, we start each sentence from the newline to reduce length
-        # of line and made text easier to read
+        # of line and make text easier to read
         zodiac_horoscope = zodiac_json['horoscope'].replace('. ', '.\n')
 
         # We take information of the city, that user defines
@@ -223,7 +223,6 @@ class UniqueAdd(NewsAdd):
     # As in the NewsAdd, this method defines what user want to write. But we overwrite this method as method ahead to
     # define what city and zodiac sign user want to write
     def user_message(self, file_flag):
-        # We take city
         print("\nThis add creates headline with information about today's day, temperature and horoscope for your "
               "zodiac sign.\n")
         # We create this flag to understand, is the location, that will be returned by geopy.geocoders module is correct
@@ -273,7 +272,7 @@ class UserChoose:
     # Because I did not create __init__ in this class I specified this method as static. In that case, we can do not
     # use self in the method variables
     @staticmethod
-    def news_type_choose():
+    def news_type_choice():
         # We ask user if he/she wants to overwrite file
         file_flag = input('\nDo you want to re-write the file? Yes/No. Exit - end program: \n')
         file_flag = file_flag.lower()
@@ -283,7 +282,7 @@ class UserChoose:
         if file_flag == 'Exit':
             return 'Program was ended by user'
 
-        # If flag for re-writing if incorrect, we ask used to write flag once again
+        # If flag for re-writing is incorrect, we ask user to write flag once again
         while (file_flag != 'Yes') and (file_flag != 'No'):
             print(f'You enter incorrect command - {file_flag} - for file re-writing. Please, write Yes or No')
             file_flag = input('Do you want to re-write the file? Yes/No Exit - end program: \n')
@@ -312,7 +311,7 @@ class UserChoose:
             if add_type == 'Exit':
                 return 'Program was ended by user'
 
-        # And then depending on flag we execute classes
+        # And then depending on flag we call classes
         if add_type == 'News':
             # On the first parameter we take own class because we need to define self part
             NewsAdd.user_message(NewsAdd(), file_flag)
@@ -323,4 +322,4 @@ class UserChoose:
 
 
 # And in the global scope we just call method from one class
-UserChoose().news_type_choose()
+UserChoose().news_type_choice()
