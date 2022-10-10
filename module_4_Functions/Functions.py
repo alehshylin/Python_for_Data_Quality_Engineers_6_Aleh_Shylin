@@ -148,23 +148,24 @@ def collections_task_2_2(result_dict_keys, result_dict_values, list_with_dicts):
     return result_dict
 
 
-# Firstly we call function collections_task_1(). It generates list with dicts and return it. We collect this list to
-# variable 'result_list'
-result_list = collections_task_1()
+if __name__ == "__main__" :
+    # Firstly we call function collections_task_1(). It generates list with dicts and return it. We collect this list to
+    # variable 'result_list'
+    result_list = collections_task_1()
 
-# Let's print our list
-print(f'\nHome task 1 - create a list of random number of dicts, result list: \n {result_list} \n')
+    # Let's print our list
+    print(f'\nHome task 1 - create a list of random number of dicts, result list: \n {result_list} \n')
 
-# Then we call function collections_task_2_1(). This function takes list with dicts as required parameter and returns
-# pre-ready keys and values. We store pre-ready keys in variable final_dict_keys and values in final_dict_values
-final_dict_keys, final_dict_values = collections_task_2_1(result_list)
+    # Then we call function collections_task_2_1(). This function takes list with dicts as required parameter and returns
+    # pre-ready keys and values. We store pre-ready keys in variable final_dict_keys and values in final_dict_values
+    final_dict_keys, final_dict_values = collections_task_2_1(result_list)
 
-# At the end we call function collections_task_2_2(). This function takes pre-ready keys and values and list with dicts.
-# Function returns final dict and we store it in the variable final_dict
-final_dict = collections_task_2_2(final_dict_keys, final_dict_values, result_list)
+    # At the end we call function collections_task_2_2(). This function takes pre-ready keys and values and list with dicts.
+    # Function returns final dict and we store it in the variable final_dict
+    final_dict = collections_task_2_2(final_dict_keys, final_dict_values, result_list)
 
-# Let's print our final dict
-print(f'Home task 2 - create one dict with from list of dicts, result dict: \n {final_dict} \n')
+    # Let's print our final dict
+    print(f'Home task 2 - create one dict with from list of dicts, result dict: \n {final_dict} \n')
 
 
 # Module 3 String Object
@@ -200,7 +201,7 @@ homEwork:
 
  
 
-  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87. """
+  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87."""
 
     space_count = variable_with_original_text.count('\u0020')
 
@@ -214,8 +215,9 @@ homEwork:
 
     for sentence in re.split('\.|!|\?', variable_with_original_text):
         if (sentence != '\u0020') and (sentence != '\n') and (sentence != ''):
-            first, *middle, last = sentence.split()
-            last_sentence += last + ' '
+            sentence_list = sentence.split(' ')
+            last_word = sentence_list[len(sentence_list) - 1]
+            last_sentence += last_word + ' '
 
     final_text = ''
     is_upper_flag = 0
@@ -245,8 +247,9 @@ homEwork:
     return final_text, space_count
 
 
-# I call function string_task() with main logic and take 2 arguments (final text and number of whitespaces) from it
-ready_text, final_count = string_task()
-# After all, I print final text and number of whitespaces in the original text
-print('\nTransformed text with added sentence:\n\n', ready_text)
-print('\nNumber of whitespaces from original text:', final_count)
+if __name__ == "__main__":
+    # I call function string_task() with main logic and take 2 arguments (final text and number of whitespaces) from it
+    ready_text, final_count = string_task()
+    # After all, I print final text and number of whitespaces in the original text
+    print('\nTransformed text with added sentence:\n\n', ready_text)
+    print('\nNumber of whitespaces from original text:', final_count)

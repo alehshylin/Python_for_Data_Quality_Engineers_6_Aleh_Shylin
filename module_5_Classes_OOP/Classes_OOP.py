@@ -321,5 +321,6 @@ class UserChoose:
             UniqueAdd.user_message(UniqueAdd(), file_flag)
 
 
-# And in the global scope we just call method from one class
-UserChoose().news_type_choice()
+if __name__ == "__main__":
+    # And in the global scope we just call method from one class
+    UserChoose().news_type_choice()
