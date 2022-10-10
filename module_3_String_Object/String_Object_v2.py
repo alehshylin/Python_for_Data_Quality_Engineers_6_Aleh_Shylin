@@ -45,14 +45,13 @@ for sentence in re.split('\.|!|\?', variable_with_original_text):
     # There are some possibilities that sentence will be just whitespace. In that case first, *middle, last will not
     # work. That's why I firstly check, if sentence contains only whitespace
     if (sentence != '\u0020') and (sentence != '\n') and (sentence != ''):
-        # If sentence contains letters then I split each words to three variables. Variable 'first' contains first word
-        # of the sentence. Variable 'last' contains the last word of the sentence. Variable (or it is better to say
-        # array or *args) '*middle' contains all other words (we can say words that is not first and last in the
-        # sentence). We will work with 'last' variable only.
-        first, *middle, last = sentence.split()
-        # In the task requirements we need to create last sentence with last words. We just add value from 'last'
+        # If sentence contains letters then I split each word by space, write split words to the list and take the
+        # latest element of this list. This element is the last word
+        sentence_list = sentence.split(' ')
+        last_word = sentence_list[len(sentence_list) - 1]
+        # In the task requirements we need to create last sentence with last words. We just add value from 'last_word'
         # variable to our variable 'last_sentence' with a space
-        last_sentence += last + ' '
+        last_sentence += last_word + ' '
 
 # Then I create variable for the transformed text
 final_text = ''

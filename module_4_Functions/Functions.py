@@ -187,7 +187,21 @@ def sentence_transformation(sentence):
 def string_task():
 
     variable_with_original_text = """
-Why?"""
+homEwork:
+
+  tHis iz your homeWork, copy these Text to variable.
+
+ 
+
+  You NEED TO normalize it fROM letter CASEs point oF View. also, create one MORE senTENCE witH LAST WoRDS of each existING SENtence and add it to the END OF this Paragraph.
+
+ 
+
+  it iZ misspeLLing here. fix“iZ” with correct “is”, but ONLY when it Iz a mistAKE.
+
+ 
+
+  last iz TO calculate nuMber OF Whitespace characteRS in this Tex. caREFULL, not only Spaces, but ALL whitespaces. I got 87."""
 
     space_count = variable_with_original_text.count('\u0020')
 
@@ -201,8 +215,9 @@ Why?"""
 
     for sentence in re.split('\.|!|\?', variable_with_original_text):
         if (sentence != '\u0020') and (sentence != '\n') and (sentence != ''):
-            first, *middle, last = sentence.split()
-            last_sentence += last + ' '
+            sentence_list = sentence.split(' ')
+            last_word = sentence_list[len(sentence_list) - 1]
+            last_sentence += last_word + ' '
 
     final_text = ''
     is_upper_flag = 0
