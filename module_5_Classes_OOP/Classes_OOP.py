@@ -4,12 +4,15 @@ from pathlib import Path
 from datetime import datetime
 # I import sleep to pause program when I try to reach API or file
 from time import sleep
+# I import this package to catch errors in the API method api_module() from class AdvAdd()
+from socket import gaierror
 # I import requests module to work with API (I use API in my own class)
 import requests
 # I import geopy.geocoders module to use it in my own class. As overall: this is an API that gives you information
 # about the street or city or country. More info you can find here https://geopy.readthedocs.io/en/stable/. I'll
 # describe usage of this class below in the code
 from geopy.geocoders import Nominatim
+
 
 
 # First class is for the News
@@ -116,8 +119,9 @@ class NewsAdd:
     def user_message(self, file_flag):
         # User write News
         news_text = input('\nPlease, write your News: \n')
-        while news_text == "":
+        while (not news_text) or (not news_text.strip()):
             news_text = input('You enter empty news. Please, write valid News:\n')
+        news_text = news_text.strip()
         # User writes city in the another method city_check()
         city_text = NewsAdd().city_check()
         # After all we call method that write user's news to the file
@@ -182,8 +186,9 @@ class AdvAdd(NewsAdd):
     def user_message(self, file_flag):
         # User writes Adv
         adv_text = input('\nPlease, write your Advertisement: \n')
-        while adv_text == "":
+        while (not adv_text) or (not adv_text.strip()):
             adv_text = input('You enter empty advertisement. Please, write valid Advertisement: \n')
+        adv_text = adv_text.strip()
         # We ask user to write date until Adv is active by method date_module()
         date_text = AdvAdd().date_module()
         # If method return True, then we come back to the news_type_choice() method from UserChoose class (main menu)
@@ -220,7 +225,7 @@ class UniqueAdd(NewsAdd):
                 response = requests.get(api_body)
                 response.raise_for_status()
                 pointer = False
-            except requests.exceptions.HTTPError:
+            except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError, gaierror):
                 counter += 1
                 print(f'\nNumber of attempt: {counter}. API {api_name} is not reachable right now.')
                 sleep(1)
@@ -340,6 +345,7 @@ class UserChoose:
 
             # If user want to exit the program, we end our program by return
             if file_flag == 'exit':
+                print('Program was ended by user')
                 return 'Program was ended by user'
 
             # If flag for re-writing is incorrect, we ask user to write flag once again
@@ -349,6 +355,7 @@ class UserChoose:
                 file_flag = file_flag.lower()
                 # User still able to exit program
                 if file_flag == 'exit':
+                    print('Program was ended by user')
                     return 'Program was ended by user'
 
             # We ask user what type of Add he/she wants to write
@@ -357,6 +364,7 @@ class UserChoose:
 
             # User still able to exit program
             if add_type == 'exit':
+                print('Program was ended by user')
                 return 'Program was ended by user'
 
             # while flag for Add is incorrect, we ask user to re-write it
@@ -367,6 +375,7 @@ class UserChoose:
                 add_type = add_type.lower()
                 # User still able to exit program
                 if add_type == 'exit':
+                    print('Program was ended by user')
                     return 'Program was ended by user'
 
             # And then depending on flag we call classes
