@@ -132,6 +132,30 @@ class AdvAdd(NewsAdd):
         # variables and methods from the NewsAdd class
         NewsAdd.__init__(self)
 
+    # This method ask user to write date until Advertisement is active, and check, if this date is correct in
+    # formatting or not
+    def date_module(self):
+        # Date should be in specific format, that's why check, how user writes date
+        # pointer specify if data is in correct format or not. while pointer is True then we ask user to re-write date
+        pointer = True
+        while pointer is True:
+            # User writes date until Adv is active
+            date_text = input(
+                '\nPlease, write date, until which your advertisement will be active in format MM/DD/YYYY. '
+                'Exit - end program: \n')
+            date_text = date_text.lower()
+            if date_text == 'exit':
+                print('\nProgram was ended by user')
+                return True
+            try:
+                # If user writes date not in the format MM/DD/YYYY
+                date_text = datetime.strptime(date_text, '%m/%d/%Y')
+                pointer = False
+            except (ValueError, TypeError):
+                # Then we print error and ask user to write date again
+                print("\nError: Incorrect data format, please, write date in the format MM/DD/YYYY")
+        return date_text
+
     # As in the NewsAdd, this method headline to the file. This is also example of the polymorphism. We inherit method
     # from parent (super-) class and overwrite it in the child class. text_exp_date variable contains date, until Adv
     # is available. Main Logic of the method remains the same, and I will not comment it
@@ -160,38 +184,21 @@ class AdvAdd(NewsAdd):
         adv_text = input('\nPlease, write your Advertisement: \n')
         while adv_text == "":
             adv_text = input('You enter empty advertisement. Please, write valid Advertisement: \n')
-        # Date should be in specific format, that's why check, how user writes date
-        # pointer specify if data is in correct format or not. while pointer is True then we ask user to re-write date
-        pointer = True
-        while pointer is True:
-            # User writes date until Adv is active
-            date_text = input(
-                'Please, write date, until which your advertisement will be active in format MM/DD/YYYY: \n')
-            try:
-                # If user writes date not in the format MM/DD/YYYY
-                date_text = datetime.strptime(date_text, '%m/%d/%Y')
-                pointer = False
-            except (ValueError, TypeError):
-                # Then we print error and ask user to write date again
-                print("\nError: Incorrect data format, please, write date in the format MM/DD/YYYY\n")
+        # We ask user to write date until Adv is active by method date_module()
+        date_text = AdvAdd().date_module()
+        # If method return True, then we come back to the news_type_choice() method from UserChoose class (main menu)
+        if date_text is True:
+            return True
         # Date should be more than today's date. If not:
         while date_text <= datetime.today():
             # We raise self-made error and did not stop the execution
             print(f"\nError: You entered date {date_text.strftime('%m/%d/%Y')} less or equal that today's "
-                  f"date {datetime.today().strftime('%m/%d/%Y')}. Advertisement can be only with future dates.\n")
-            pointer = True
-            # And ask to write date one more time
-            while pointer is True:
-                # User writes date until Adv is active
-                date_text = input(
-                    'Please, write date, until which your advertisement will be active in format MM/DD/YYYY: \n')
-                try:
-                    # If user writes date not in the format MM/DD/YYYY
-                    date_text = datetime.strptime(date_text, '%m/%d/%Y')
-                    pointer = False
-                except (ValueError, TypeError):
-                    # Then we stop execution and raise an error
-                    print("\nError: Incorrect data format, please, write date in the format MM/DD/YYYY\n")
+                  f"date {datetime.today().strftime('%m/%d/%Y')}. Advertisement can be only with future dates.")
+            # And ask user to write date again
+            date_text = AdvAdd().date_module()
+            # If method return True, then we come back to the news_type_choice() method from UserChoose class (main menu)
+            if date_text is True:
+                return True
         # And call method that writes Adv to the file
         exit_flag = AdvAdd.message_module(self, file_flag, adv_text, date_text)
         return exit_flag
@@ -322,9 +329,9 @@ class UserChoose:
     # use self in the method variables
     @staticmethod
     def news_type_choice():
-        # In order to stay in the main menu I create while statement... while exit_flag is False we always will be in
+        # In order to stay in the main menu I create while... statement while exit_flag is False we always will be in
         # the main menu. Even if some error will happen in API or file parsing. Variable exit_flag returns from all
-        # methods
+        # methods user_module()
         exit_flag = False
         while exit_flag is False:
             # We ask user if he/she wants to overwrite file
