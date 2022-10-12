@@ -1,1 +1,9 @@
-'asdasdasd'
+ThiS iS tHe first reCord for the News!
+-----
+And this is record for the advertisement. Want to sell smth?
+------------
+and this is strange record for the news.
+--with some strange formatting
+which should remains the same?
+-
+exActly.
