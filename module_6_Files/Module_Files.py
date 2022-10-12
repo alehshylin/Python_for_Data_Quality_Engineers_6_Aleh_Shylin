@@ -18,6 +18,11 @@ class FileRecords:
 
     # This method copies file from default or user directory to the specific directory from which it will be parsed
     def file_actions_copy(self, file_path='backup_directory/backup_file.txt'):
+
+        # If directory from which we will parse file is not exists, then we create it
+        if not os.path.isdir(self.destination_path):
+            os.mkdir(self.destination_path)
+
         # Split path
         file_path_list = os.path.split(file_path)
         # If file path is not default then I check, if this path exists or not
