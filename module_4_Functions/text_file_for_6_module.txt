@@ -1,0 +1,4 @@
+thIs is the news from the text file which is located in the another directory.
+
+
+tHis file Contains only 1 news?
