@@ -12,6 +12,9 @@ import re
 # And datetime to compare dates in Adv news
 from datetime import datetime
 
+# Because file Module_Files remains the main, I import methods that count words and letters and use them in this file
+from module_7_CSV import CSV as csv_module_7
+
 
 # All methods are in one class
 class FileRecords:
@@ -196,6 +199,9 @@ class FileRecords:
                 if text_file is False:
                     return False
                 FileRecords().text_actions_write(file_flag, text_file)
+
+        csv_module_7.CsvParsing().word_count()
+        csv_module_7.CsvParsing().letter_count()
 
 
 if __name__ == "__main__":

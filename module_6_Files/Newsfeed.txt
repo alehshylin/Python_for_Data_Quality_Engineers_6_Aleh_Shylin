@@ -1,18 +1,12 @@
 News ----------------------------------------
-This news I wrote from the console! 
-vilnius, 10/12/2022 14.08 
----------------------------------------------
-
-
-News ----------------------------------------
-This is the first record for the news!
-London, 10/12/2022 14.08 
+This is the first record for the news! 
+Minsk, 10/13/2022 13.47 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
 And this is record for the advertisement. Want to sell smth? 
-Actual until 02/20/2023, 131 days left 
+Actual until 12/02/2022, 50 days left 
 ---------------------------------------------
 
 
@@ -22,16 +16,29 @@ And this is strange record for the news.
 which should remains the same?
 -
 Exactly. 
-Ottava, 10/12/2022 14.09 
+kaunas, 10/13/2022 13.47 
 ---------------------------------------------
 
 
 News ----------------------------------------
-This is the news from the text file which is located in the another directory.
+This is the first record for the news! 
+minsk, 10/13/2022 13.47 
+---------------------------------------------
 
 
-This file contains only 1 news? 
-Oregon, 10/12/2022 14.10 
+Private ad ----------------------------------
+And this is record for the advertisement. Want to sell smth? 
+Actual until 12/13/2022, 61 days left 
+---------------------------------------------
+
+
+News ----------------------------------------
+And this is strange record for the news.
+--With some strange formatting
+which should remains the same?
+-
+Exactly. 
+Mins, 10/13/2022 13.48 
 ---------------------------------------------
 
 
