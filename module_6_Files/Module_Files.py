@@ -9,6 +9,9 @@ import os
 import shutil
 # And re to define input format of text in file
 import re
+# And datetime to compare dates in Adv news
+from datetime import datetime
+
 
 # All methods are in one class
 class FileRecords:
@@ -86,22 +89,33 @@ class FileRecords:
     # This method add text to the Newsfeed according to the user choice. We can add text to the News or Adv headlines
     def text_actions_write(self, file_flag, text_file):
 
+        counter = 0
         for text in text_file:
             add_type = input(f"\nFor which Add you want to write this text: '{text}'? News or Adv?\n")
             add_type = add_type.lower()
             while add_type not in ('news', 'adv'):
                 print(
                     f'You enter incorrect command - {add_type} - for Add choosing. Please, write News or Adv')
-                add_type = input(f"\n For which Add you want to write this text: '{text}'? News or Adv?\n")
+                add_type = input(f"\nFor which Add you want to write this text: '{text}'? News or Adv?\n")
                 add_type = add_type.lower()
             if add_type == 'news':
+                if counter == 1:
+                    file_flag = 'no'
                 city_text = Classes.NewsAdd().city_check()
                 pointer = Classes.NewsAdd().message_module(file_flag, text, city_text)
+                counter = 1
                 if pointer is False:
                     return False
             elif add_type == 'adv':
+                if counter == 1:
+                    file_flag = 'no'
                 date_text = Classes.AdvAdd().date_module()
+                while date_text <= datetime.today():
+                    print(f"\nError: You entered date {date_text.strftime('%m/%d/%Y')} less or equal that today's "
+                          f"date {datetime.today().strftime('%m/%d/%Y')}. Advertisement can be only with future dates.")
+                    date_text = Classes.AdvAdd().date_module()
                 pointer = Classes.AdvAdd().message_module(file_flag, text, date_text)
+                counter = 1
                 if pointer is False:
                     return False
 
@@ -184,4 +198,5 @@ class FileRecords:
                 FileRecords().text_actions_write(file_flag, text_file)
 
 
-FileRecords().user_menu()
+if __name__ == "__main__":
+    FileRecords().user_menu()
