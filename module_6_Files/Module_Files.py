@@ -107,6 +107,9 @@ class FileRecords:
                 city_text = Classes.NewsAdd().city_check()
                 pointer = Classes.NewsAdd().message_module(file_flag, text, city_text)
                 counter = 1
+                # After one news was parsed, I call functions to count new words and letters
+                csv_module_7.CsvParsing().word_count()
+                csv_module_7.CsvParsing().letter_count()
                 if pointer is False:
                     return False
             elif add_type == 'adv':
@@ -119,6 +122,9 @@ class FileRecords:
                     date_text = Classes.AdvAdd().date_module()
                 pointer = Classes.AdvAdd().message_module(file_flag, text, date_text)
                 counter = 1
+                # After one news was parsed, I call functions to count new words and letters
+                csv_module_7.CsvParsing().word_count()
+                csv_module_7.CsvParsing().letter_count()
                 if pointer is False:
                     return False
 
@@ -142,6 +148,9 @@ class FileRecords:
 
         if text_flag == 'console':
             Classes.UserChoose().news_type_choice()
+            # After user write news by console, I call functions to count new words and letters
+            csv_module_7.CsvParsing().word_count()
+            csv_module_7.CsvParsing().letter_count()
         elif text_flag == 'file':
             file_flag = input('\nDo you want to re-write the file? Yes/No. Exit - end program\n')
             file_flag = file_flag.lower()
@@ -199,9 +208,6 @@ class FileRecords:
                 if text_file is False:
                     return False
                 FileRecords().text_actions_write(file_flag, text_file)
-
-        csv_module_7.CsvParsing().word_count()
-        csv_module_7.CsvParsing().letter_count()
 
 
 if __name__ == "__main__":
