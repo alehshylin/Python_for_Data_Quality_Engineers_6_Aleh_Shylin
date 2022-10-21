@@ -1,0 +1,17 @@
+{
+  "newsfeed":
+  [
+    {
+      "news_type": "news",
+      "news_text": "This is the text for the news from the json file. Parsing of ThiS File iS completed in The modUle 8!",
+      "random_value": "random_key",
+      "news_city": "Vilnius",
+      "random_key": "random_value"
+    },
+    {
+      "news_type": "Adv",
+      "adv_text": "This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed.",
+      "adv_date": "2017/02/20"
+    }
+  ]
+}

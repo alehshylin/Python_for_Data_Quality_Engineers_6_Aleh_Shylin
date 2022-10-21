@@ -1,12 +1,18 @@
 News ----------------------------------------
+This news was written from the console. Next couple of news will be from the .txt file 
+Vilnius, 10/21/2022 11.36 
+---------------------------------------------
+
+
+News ----------------------------------------
 This is the first record for the news! 
-Minsk, 10/13/2022 13.47 
+Vilnius, 10/21/2022 11.37 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
 And this is record for the advertisement. Want to sell smth? 
-Actual until 12/02/2022, 50 days left 
+Actual until 12/12/2022, 52 days left 
 ---------------------------------------------
 
 
@@ -16,29 +22,37 @@ And this is strange record for the news.
 which should remains the same?
 -
 Exactly. 
-kaunas, 10/13/2022 13.47 
----------------------------------------------
-
-
-News ----------------------------------------
-This is the first record for the news! 
-minsk, 10/13/2022 13.47 
+Kaunas, 10/21/2022 11.37 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
-And this is record for the advertisement. Want to sell smth? 
-Actual until 12/13/2022, 61 days left 
+Next couple of news will be from the .json file. 
+Actual until 12/12/2022, 52 days left 
 ---------------------------------------------
 
 
 News ----------------------------------------
-And this is strange record for the news.
---With some strange formatting
-which should remains the same?
--
-Exactly. 
-Mins, 10/13/2022 13.48 
+This is the text for the news from the json file. Parsing of this file is completed in the module 8! 
+Vilnius, 10/21/2022 11.38 
+---------------------------------------------
+
+
+Private ad ----------------------------------
+This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed. 
+Actual until 12/12/2022, 52 days left 
+---------------------------------------------
+
+
+News ----------------------------------------
+Last news will be from the .json file. This json contains two news, one of which has incorrect mapping. In that case Program will raise an error and ends. 
+Minsk, 10/21/2022 11.39 
+---------------------------------------------
+
+
+News ----------------------------------------
+This is the news with correct mapping. This news should be processed correctly 
+Vilnius, 10/21/2022 11.39 
 ---------------------------------------------
 
 

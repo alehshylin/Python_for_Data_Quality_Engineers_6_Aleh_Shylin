@@ -11,9 +11,10 @@ import shutil
 import re
 # And datetime to compare dates in Adv news
 from datetime import datetime
-
 # Because file Module_Files remains the main, I import methods that count words and letters and use them in this file
 from module_7_CSV import CSV as csv_module_7
+# As file Module_Files remains the main, I import class from module 8 in this file
+from module_8_JSON import JSON as json_module_8
 
 
 # All methods are in one class
@@ -107,6 +108,8 @@ class FileRecords:
                 city_text = Classes.NewsAdd().city_check()
                 pointer = Classes.NewsAdd().message_module(file_flag, text, city_text)
                 counter = 1
+                csv_module_7.CsvParsing().word_count()
+                csv_module_7.CsvParsing().letter_count()
                 if pointer is False:
                     return False
             elif add_type == 'adv':
@@ -119,6 +122,8 @@ class FileRecords:
                     date_text = Classes.AdvAdd().date_module()
                 pointer = Classes.AdvAdd().message_module(file_flag, text, date_text)
                 counter = 1
+                csv_module_7.CsvParsing().word_count()
+                csv_module_7.CsvParsing().letter_count()
                 if pointer is False:
                     return False
 
@@ -142,7 +147,25 @@ class FileRecords:
 
         if text_flag == 'console':
             Classes.UserChoose().news_type_choice()
+            csv_module_7.CsvParsing().word_count()
+            csv_module_7.CsvParsing().letter_count()
         elif text_flag == 'file':
+
+            file_type_flag = input('\nDo you want to write news by .json or .txt? json/txt. Exit - end program\n')
+            file_type_flag = file_type_flag.lower()
+
+            if file_type_flag == 'exit':
+                print('\nProgram was ended by user')
+                return 'Program was ended by user'
+
+            while file_type_flag not in ('json', 'txt'):
+                print(f'\nYou enter incorrect command - {text_flag} - for file type. Please, write json or txt')
+                file_type_flag = input('\nDo you want to write news by .json or .txt? json/txt. Exit - end program\n')
+                file_type_flag = file_type_flag.lower()
+                if file_type_flag == 'exit':
+                    print('\nProgram was ended by user')
+                    return 'Program was ended by user'
+
             file_flag = input('\nDo you want to re-write the file? Yes/No. Exit - end program\n')
             file_flag = file_flag.lower()
 
@@ -176,32 +199,52 @@ class FileRecords:
 
             # If user select default directory we
             if directory_flag == 'default':
-                # Call method that copies file from default folder
-                pointer = FileRecords.file_actions_copy(self)
-                # If pointer returns False, that means, that previous method fails, and we need to end the program
-                if pointer is False:
-                    return False
-                # Parse this file
-                text_file = FileRecords.file_actions_parse(self)
-                if text_file is False:
-                    return False
-                # And ask user to define, for which type of Newsfeed user wants to add record
-                FileRecords().text_actions_write(file_flag, text_file)
+                if file_type_flag == 'txt':
+                    # Call method that copies file from default folder
+                    pointer = FileRecords.file_actions_copy(self)
+                    # If pointer returns False, that means, that previous method fails, and we need to end the program
+                    if pointer is False:
+                        return False
+                    # Parse this file
+                    text_file = FileRecords.file_actions_parse(self)
+                    if text_file is False:
+                        return False
+                    # And ask user to define, for which type of Newsfeed user wants to add record
+                    FileRecords().text_actions_write(file_flag, text_file)
+                elif file_type_flag == 'json':
+                    pointer = json_module_8.JSONRecords().json_actions_copy()
+                    if pointer is False:
+                        return False
+                    text_file = json_module_8.JSONRecords().json_actions_parse()
+                    if text_file is False:
+                        return False
+                    pointer = json_module_8.JSONRecords().text_json_actions_write(file_flag, text_file)
+                    if pointer is False:
+                        return False
             # If user select his/her directory
             elif directory_flag == 'new':
-                # We ask user to write directory path (note: path should be absolute)
-                directory_path = input('\nPlease, enter your file path: \n')
-                # And perform the same steps as in the 'default path' way
-                pointer = FileRecords.file_actions_copy(self, file_path=directory_path)
-                if pointer is False:
-                    return False
-                text_file = FileRecords.file_actions_parse(self)
-                if text_file is False:
-                    return False
-                FileRecords().text_actions_write(file_flag, text_file)
-
-        csv_module_7.CsvParsing().word_count()
-        csv_module_7.CsvParsing().letter_count()
+                if file_type_flag == 'txt':
+                    # We ask user to write directory path (note: path should be absolute)
+                    directory_path = input('\nPlease, enter your file path: \n')
+                    # And perform the same steps as in the 'default path' way
+                    pointer = FileRecords.file_actions_copy(self, file_path=directory_path)
+                    if pointer is False:
+                        return False
+                    text_file = FileRecords.file_actions_parse(self)
+                    if text_file is False:
+                        return False
+                    FileRecords().text_actions_write(file_flag, text_file)
+                elif file_type_flag == 'json':
+                    directory_path = input('\nPlease, enter your file path: \n')
+                    pointer = json_module_8.JSONRecords().json_actions_copy(file_path=directory_path)
+                    if pointer is False:
+                        return False
+                    text_file = json_module_8.JSONRecords().json_actions_parse()
+                    if text_file is False:
+                        return False
+                    pointer = json_module_8.JSONRecords().text_json_actions_write(file_flag, text_file)
+                    if pointer is False:
+                        return False
 
 
 if __name__ == "__main__":

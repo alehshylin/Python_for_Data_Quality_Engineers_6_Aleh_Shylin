@@ -1,0 +1,15 @@
+{
+  "newsfeed":
+  [
+    {
+      "news_type": "news",
+      "news_text": "This is the news with correct mapping. This news should be processed correctly",
+      "news_city": "Vilnius"
+    },
+    {
+      "news_type": "NEWS",
+      "news_text": "This news doesn't have city key. In that case program should return error and ends",
+      "adv_date": "Vilnius"
+    }
+  ]
+}

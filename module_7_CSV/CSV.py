@@ -3,7 +3,7 @@ import csv
 
 
 # this class and it's methods are imported to the file 'Module_Files.py'. To use this method you need to execute
-# this file
+# file 'Module_Files.py'.
 class CsvParsing:
     # method word_count() counts number of words and write results to the .csv file word_count
     def word_count(self, newsfeed_file_path="Newsfeed.txt"):
