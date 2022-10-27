@@ -15,6 +15,8 @@ from datetime import datetime
 from module_7_CSV import CSV as csv_module_7
 # As file Module_Files remains the main, I import class from module 8 in this file
 from module_8_JSON import JSON as json_module_8
+# While Module_Files remains the main, I continue import classes to this file
+from module_9_XML import XML as xml_module_9
 
 
 # All methods are in one class
@@ -154,16 +156,18 @@ class FileRecords:
             csv_module_7.CsvParsing().letter_count()
         elif text_flag == 'file':
 
-            file_type_flag = input('\nDo you want to write news by .json or .txt? json/txt. Exit - end program\n')
+            file_type_flag = input('\nDo you want to write news by .json, .txt or .xml? json/txt/xml. '
+                                   'Exit - end program\n')
             file_type_flag = file_type_flag.lower()
 
             if file_type_flag == 'exit':
                 print('\nProgram was ended by user')
                 return 'Program was ended by user'
 
-            while file_type_flag not in ('json', 'txt'):
-                print(f'\nYou enter incorrect command - {text_flag} - for file type. Please, write json or txt')
-                file_type_flag = input('\nDo you want to write news by .json or .txt? json/txt. Exit - end program\n')
+            while file_type_flag not in ('json', 'txt', 'xml'):
+                print(f'\nYou enter incorrect command - {text_flag} - for file type. Please, write json or txt or xml')
+                file_type_flag = input('\nDo you want to write news by .json, .txt or .xml? json/txt/xml. '
+                                       'Exit - end program\n')
                 file_type_flag = file_type_flag.lower()
                 if file_type_flag == 'exit':
                     print('\nProgram was ended by user')
@@ -224,6 +228,14 @@ class FileRecords:
                     pointer = json_module_8.JSONRecords().text_json_actions_write(file_flag, text_file)
                     if pointer is False:
                         return False
+                elif file_type_flag == 'xml':
+                    pointer = xml_module_9.XMLRecords().xml_actions_copy()
+                    if pointer is False:
+                        return False
+                    xml_file = xml_module_9.XMLRecords().xml_actions_parse()
+                    if xml_file is False:
+                        return False
+                    xml_module_9.XMLRecords().text_xml_actions_write(file_flag, xml_file)
             # If user select his/her directory
             elif directory_flag == 'new':
                 if file_type_flag == 'txt':
@@ -248,6 +260,15 @@ class FileRecords:
                     pointer = json_module_8.JSONRecords().text_json_actions_write(file_flag, text_file)
                     if pointer is False:
                         return False
+                elif file_type_flag == 'xml':
+                    directory_path = input('\nPlease, enter your file path: \n')
+                    pointer = xml_module_9.XMLRecords().xml_actions_copy(file_path=directory_path)
+                    if pointer is False:
+                        return False
+                    xml_file = xml_module_9.XMLRecords().xml_actions_parse()
+                    if xml_file is False:
+                        return False
+                    xml_module_9.XMLRecords().text_xml_actions_write(file_flag, xml_file)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,25 @@
+<newsfeed>
+    <news_feed>
+        <news_type>news</news_type>
+        <news_text>This is the text for the news from the xml file. Parsing of ThiS File iS completed in The modUle 9!</news_text>
+        <random_key>random_value</random_key>
+        <news_city>Vilnius</news_city>
+        <random_value>random_key</random_value>
+    </news_feed>
+    <news_feed>
+        <news_type>not_news</news_type>
+        <news_text>This is the text with incorrect news_type. This text will not be parsed</news_text>
+        <random_key>random_value</random_key>
+        <news_city>Vilnius</news_city>
+        <random_value>random_key</random_value>
+    </news_feed>
+    <news_feed>
+        <news_type>news</news_type>
+        <news_text>This is the text with incorrect mapping. This text will not be parsed</news_text>
+    </news_feed>
+    <news_feed>
+        <news_type>AdV</news_type>
+        <adv_text>This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed </adv_text>
+        <adv_date>2022/10/10</adv_date>
+    </news_feed>
+</newsfeed>

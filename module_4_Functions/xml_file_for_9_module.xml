@@ -1,0 +1,17 @@
+<newsfeed>
+    <news_feed>
+        <news_type>news</news_type>
+        <news_text>This is the text from non-default file. Mapping of this news is correct and text will be parsed.</news_text>
+        <news_city>Vilnius</news_city>
+    </news_feed>
+    <news_>
+        <news_type>news</news_type>
+        <news_text>This news have incorrect main tag. In that case, this text will not be parsed to the newsfeed file.</news_text>
+        <news_city>Vilnius</news_city>
+    </news_>
+    <news_feed>
+        <news_type>AdV</news_type>
+        <adv_text>This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed </adv_text>
+        <adv_date>2022/10/10</adv_date>
+    </news_feed>
+</newsfeed>

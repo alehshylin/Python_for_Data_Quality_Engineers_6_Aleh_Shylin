@@ -108,7 +108,9 @@ class JSONRecords:
                             try:
                                 news_dict['adv_date'] = datetime.strptime(news_dict['adv_date'], '%m/%d/%Y')
                             except (ValueError, TypeError):
-                                print("\nError: Incorrect data format. We will ask you to write new date")
+                                print(f"\nError: Incorrect data format for the advertisement: \n"
+                                      f"{news_dict['adv_text']}\n "
+                                      f"We will ask you to write new date.")
                                 news_dict['adv_date'] = Classes.AdvAdd().date_module()
                             while news_dict['adv_date'] <= datetime.today():
                                 print(

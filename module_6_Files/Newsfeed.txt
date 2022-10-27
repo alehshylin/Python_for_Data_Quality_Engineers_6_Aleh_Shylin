@@ -1,58 +1,42 @@
 News ----------------------------------------
-This news was written from the console. Next couple of news will be from the .txt file 
-Vilnius, 10/21/2022 11.36 
----------------------------------------------
-
-
-News ----------------------------------------
-This is the first record for the news! 
-Vilnius, 10/21/2022 11.37 
+This is the text for the news from the xml file. Parsing of this file is completed in the module 9! 
+Vilnius, 10/27/2022 10.54 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
-And this is record for the advertisement. Want to sell smth? 
-Actual until 12/12/2022, 52 days left 
+This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed 
+Actual until 12/12/2022, 46 days left 
 ---------------------------------------------
 
 
 News ----------------------------------------
-And this is strange record for the news.
---With some strange formatting
-which should remains the same?
--
-Exactly. 
-Kaunas, 10/21/2022 11.37 
+This is the text from non-default file. Mapping of this news is correct and text will be parsed. 
+Vilnius, 10/27/2022 10.55 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
-Next couple of news will be from the .json file. 
-Actual until 12/12/2022, 52 days left 
+This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed 
+Actual until 11/01/2022, 5 days left 
 ---------------------------------------------
 
 
 News ----------------------------------------
 This is the text for the news from the json file. Parsing of this file is completed in the module 8! 
-Vilnius, 10/21/2022 11.38 
+Vilnius, 10/27/2022 10.55 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
 This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed. 
-Actual until 12/12/2022, 52 days left 
+Actual until 12/23/2022, 57 days left 
 ---------------------------------------------
 
 
 News ----------------------------------------
-Last news will be from the .json file. This json contains two news, one of which has incorrect mapping. In that case Program will raise an error and ends. 
-Minsk, 10/21/2022 11.39 
----------------------------------------------
-
-
-News ----------------------------------------
-This is the news with correct mapping. This news should be processed correctly 
-Vilnius, 10/21/2022 11.39 
+Just random news from the console 
+Minsk, 10/27/2022 10.57 
 ---------------------------------------------
 
 
