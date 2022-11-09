@@ -97,6 +97,7 @@ class FileRecords:
     # This method add text to the Newsfeed according to the user choice. We can add text to the News or Adv headlines
     def text_actions_write(self, file_flag, text_file):
 
+        csv_class = csv_module_7.CsvParsing()
         counter = 0
         for text in text_file:
             add_type = input(f"\nFor which Add you want to write this text: '{text}'? News or Adv?\n")
@@ -113,8 +114,8 @@ class FileRecords:
                 pointer = Classes.NewsAdd().message_module(file_flag, text, city_text)
                 counter = 1
                 # After one news was parsed, I call functions to count new words and letters
-                csv_module_7.CsvParsing().word_count()
-                csv_module_7.CsvParsing().letter_count()
+                csv_class.word_count()
+                csv_class.letter_count()
                 if pointer is False:
                     return False
             elif add_type == 'adv':
@@ -128,138 +129,91 @@ class FileRecords:
                 pointer = Classes.AdvAdd().message_module(file_flag, text, date_text)
                 counter = 1
                 # After one news was parsed, I call functions to count new words and letters
-                csv_module_7.CsvParsing().word_count()
-                csv_module_7.CsvParsing().letter_count()
+                csv_class.word_count()
+                csv_class.letter_count()
                 if pointer is False:
                     return False
 
     # This is the main menu of the module.
     def user_menu(self):
+
+        file_records_class = FileRecords()
+        oop_classes = Classes.UserChoose()
+        csv_class = csv_module_7.CsvParsing()
+        json_class = json_module_8.JSONRecords()
+        xml_class = xml_module_9.XMLRecords()
+        database_class = database_module_10.DatabaseAPI()
+
         # User can work with new module of with the module from homework 5
         text_flag = input('\nDo you want to write news by console of file? Console/File. Exit - end program\n')
-        text_flag = text_flag.lower()
-
+        text_flag = oop_classes.user_menu_flag_checking(text_flag, ('console', 'file'))
         if text_flag == 'exit':
-            print('\nProgram was ended by user')
             return 'Program was ended by user'
-
-        while text_flag not in ('console', 'file'):
-            print(f'\nYou enter incorrect command - {text_flag} - for news writing. Please, write Console or File')
-            text_flag = input('\nDo you want to write news by console of file? Console/File.\n')
-            text_flag = text_flag.lower()
-            if text_flag == 'exit':
-                print('\nProgram was ended by user')
-                return 'Program was ended by user'
 
         # We ask user if he wants to drop all tables from the database
         database_flag = input('\nDo you want to drop all tables from the database? Yes/No. Exit - end program\n')
-        database_flag = database_flag.lower()
-
+        database_flag = oop_classes.user_menu_flag_checking(database_flag, ('yes', 'no'))
         if database_flag == 'exit':
-            print('\nProgram was ended by user')
             return 'Program was ended by user'
-
-        # Logic of the menu is almost the same as in the 5 homework
-        while database_flag not in ('yes', 'no'):
-            print(f'You enter incorrect command - {database_flag} - for database re-writing. Please,'
-                  f' write Yes or No')
-            database_flag = input('Do you want to drop all tables from the database? Yes/No. Exit - end program\n')
-            database_flag = database_flag.lower()
-            if database_flag == 'exit':
-                print('\nProgram was ended by user')
-                return 'Program was ended by user'
-
         # If user wants to drop tables then we drop them
         if database_flag == 'yes':
-            database_module_10.DatabaseAPI().table_drop()
+            database_class.table_drop()
 
         if text_flag == 'console':
-            Classes.UserChoose().news_type_choice()
+            oop_classes.news_type_choice()
             # After user write news by console, I call functions to count new words and letters
-            csv_module_7.CsvParsing().word_count()
-            csv_module_7.CsvParsing().letter_count()
+            csv_class.word_count()
+            csv_class.letter_count()
 
         elif text_flag == 'file':
             file_type_flag = input('\nDo you want to write news by .json, .txt or .xml? json/txt/xml. '
                                    'Exit - end program\n')
-            file_type_flag = file_type_flag.lower()
-
+            file_type_flag = oop_classes.user_menu_flag_checking(file_type_flag, ('json', 'txt', 'xml'))
             if file_type_flag == 'exit':
-                print('\nProgram was ended by user')
                 return 'Program was ended by user'
-
-            while file_type_flag not in ('json', 'txt', 'xml'):
-                print(f'\nYou enter incorrect command - {text_flag} - for file type. Please, write json or txt or xml')
-                file_type_flag = input('\nDo you want to write news by .json, .txt or .xml? json/txt/xml. '
-                                       'Exit - end program\n')
-                file_type_flag = file_type_flag.lower()
-                if file_type_flag == 'exit':
-                    print('\nProgram was ended by user')
-                    return 'Program was ended by user'
 
             file_flag = input('\nDo you want to re-write the file? Yes/No. Exit - end program\n')
-            file_flag = file_flag.lower()
-
+            file_flag = oop_classes.user_menu_flag_checking(file_flag, ('yes', 'no'))
             if file_flag == 'exit':
-                print('\nProgram was ended by user')
                 return 'Program was ended by user'
-
-            # Logic of the menu is almost the same as in the 5 homework
-            while file_flag not in ('yes', 'no'):
-                print(f'You enter incorrect command - {file_flag} - for file re-writing. Please, write Yes or No')
-                file_flag = input('Do you want to re-write the file? Yes/No. Exit - end program\n')
-                file_flag = file_flag.lower()
-                if file_flag == 'exit':
-                    print('\nProgram was ended by user')
-                    return 'Program was ended by user'
 
             directory_flag = input('\nDo you want to use default or new directory? Default/New. Exit - end program\n')
-            directory_flag = directory_flag.lower()
+            directory_flag = oop_classes.user_menu_flag_checking(directory_flag, ('default', 'new'))
             if directory_flag == 'exit':
-                print('\nProgram was ended by user')
                 return 'Program was ended by user'
-
-            while directory_flag not in ('default', 'new'):
-                print(f'\nYou wrote incorrect command {directory_flag}. Please, enter Default or New')
-                directory_flag = input('\nDo you want to use default or new directory? Default/New. Exit - end '
-                                       'program\n')
-                directory_flag = directory_flag.lower()
-                if directory_flag == 'exit':
-                    print('\nProgram was ended by user')
-                    return 'Program was ended by user'
 
             # If user select default directory we
             if directory_flag == 'default':
                 if file_type_flag == 'txt':
                     # Call method that copies file from default folder
-                    pointer = FileRecords.file_actions_copy(self)
+                    pointer = file_records_class.file_actions_copy()
                     # If pointer returns False, that means, that previous method fails, and we need to end the program
                     if pointer is False:
                         return False
                     # Parse this file
-                    text_file = FileRecords.file_actions_parse(self)
+                    text_file = file_records_class.file_actions_parse()
                     if text_file is False:
                         return False
                     # And ask user to define, for which type of Newsfeed user wants to add record
-                    FileRecords().text_actions_write(file_flag, text_file)
+                    file_records_class.text_actions_write(file_flag, text_file)
                 elif file_type_flag == 'json':
-                    pointer = json_module_8.JSONRecords().json_actions_copy()
+                    pointer = json_class.json_actions_copy()
                     if pointer is False:
                         return False
-                    text_file = json_module_8.JSONRecords().json_actions_parse()
+                    text_file = json_class.json_actions_parse()
                     if text_file is False:
                         return False
-                    pointer = json_module_8.JSONRecords().text_json_actions_write(file_flag, text_file)
+                    pointer = json_class.text_json_actions_write(file_flag, text_file)
                     if pointer is False:
                         return False
                 elif file_type_flag == 'xml':
-                    pointer = xml_module_9.XMLRecords().xml_actions_copy()
+                    pointer = xml_class.xml_actions_copy()
                     if pointer is False:
                         return False
-                    xml_file = xml_module_9.XMLRecords().xml_actions_parse()
+                    xml_file = xml_class.xml_actions_parse()
                     if xml_file is False:
                         return False
-                    xml_module_9.XMLRecords().text_xml_actions_write(file_flag, xml_file)
+                    xml_class.text_xml_actions_write(file_flag, xml_file)
             # If user select his/her directory
             elif directory_flag == 'new':
                 if file_type_flag == 'txt':
@@ -272,33 +226,33 @@ class FileRecords:
                     text_file = FileRecords.file_actions_parse(self)
                     if text_file is False:
                         return False
-                    FileRecords().text_actions_write(file_flag, text_file)
+                    file_records_class.text_actions_write(file_flag, text_file)
                 elif file_type_flag == 'json':
                     directory_path = input('\nPlease, enter your file path: \n')
-                    pointer = json_module_8.JSONRecords().json_actions_copy(file_path=directory_path)
+                    pointer = json_class.json_actions_copy(file_path=directory_path)
                     if pointer is False:
                         return False
-                    text_file = json_module_8.JSONRecords().json_actions_parse()
+                    text_file = json_class.json_actions_parse()
                     if text_file is False:
                         return False
-                    pointer = json_module_8.JSONRecords().text_json_actions_write(file_flag, text_file)
+                    pointer = json_class.text_json_actions_write(file_flag, text_file)
                     if pointer is False:
                         return False
                 elif file_type_flag == 'xml':
                     directory_path = input('\nPlease, enter your file path: \n')
-                    pointer = xml_module_9.XMLRecords().xml_actions_copy(file_path=directory_path)
+                    pointer = xml_class.xml_actions_copy(file_path=directory_path)
                     if pointer is False:
                         return False
-                    xml_file = xml_module_9.XMLRecords().xml_actions_parse()
+                    xml_file = xml_class.xml_actions_parse()
                     if xml_file is False:
                         return False
-                    xml_module_9.XMLRecords().text_xml_actions_write(file_flag, xml_file)
+                    xml_class.text_xml_actions_write(file_flag, xml_file)
 
         # I select data from all tables in the end of the program
         print("\nBelow you will see rows from all tables in the database")
-        database_module_10.DatabaseAPI().table_select('news')
-        database_module_10.DatabaseAPI().table_select('adv')
-        database_module_10.DatabaseAPI().table_select('uniq')
+        database_class.table_select('news')
+        database_class.table_select('adv')
+        database_class.table_select('uniq')
 
 
 if __name__ == "__main__":

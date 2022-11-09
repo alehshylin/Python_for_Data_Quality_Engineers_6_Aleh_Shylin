@@ -90,7 +90,7 @@ class NewsAdd:
     # This method creates News headline and execute method that write this headline to the file. file_flag variable
     # stores flag for file overwriting: if value == Yes then we overwrite file. If value == No, then we add headline
     # to the end of the file. text_message variable contains user's News. text_city variable contains user's city
-    def message_module(self, file_flag='No', text_message='Text message', text_city='Vilnius'):
+    def message_module(self, file_flag='no', text_message='Text message', text_city='Vilnius'):
 
         # We create headline message
         file_text = ['News ----------------------------------------\n', f'{text_message} \n',
@@ -198,8 +198,8 @@ class AdvAdd(NewsAdd):
         adv_text = adv_text.strip()
         # We ask user to write date until Adv is active by method date_module()
         date_text = AdvAdd().date_module()
-        # If method return True, then we come back to the news_type_choice() method from UserChoose class (main menu)
-        if date_text is True:
+        # If method return boolean, then we come back to the news_type_choice() method from UserChoose class (main menu)
+        if isinstance(date_text, bool):
             return True
         # Date should be more than today's date. If not:
         while date_text <= datetime.today():
@@ -209,7 +209,7 @@ class AdvAdd(NewsAdd):
             # And ask user to write date again
             date_text = AdvAdd().date_module()
             # If method return True, then we come back to the news_type_choice() method from UserChoose class (main menu)
-            if date_text is True:
+            if isinstance(date_text, bool):
                 return True
         # And call method that writes Adv to the file
         exit_flag = AdvAdd.message_module(self, file_flag, adv_text, date_text)
@@ -247,12 +247,12 @@ class UniqueAdd(NewsAdd):
     # As in the NewsAdd, this method creates headline. But again we overwrite this method from NewsAdd class.
     # In this state, method create headline that contains today's date, average temperature for the city that user
     # select, and horoscope for the zodiac sign that user select.
-    def message_module(self, file_flag='No', city_text='Vilnius', zodiac_sign_text='gemini'):
+    def message_module(self, file_flag='no', city_text='Vilnius', zodiac_sign_text='gemini'):
         # We call API by execution api_module() method to retrieve horoscope for the specific zodiac sign.
         # We do not need to sign up to work with this API
         zodiac_response = UniqueAdd().api_module('zodiac_api', f'https://ohmanda.com/api/horoscope/{zodiac_sign_text}')
         # If response return False, then requests fails, and we need to come back to the main menu
-        if zodiac_response is False:
+        if isinstance(zodiac_response, bool):
             return False
         # And transform response to the json format
         zodiac_json = zodiac_response.json()
@@ -277,7 +277,7 @@ class UniqueAdd(NewsAdd):
                                                   f'longitude={location_longitude}&daily=temperature_2m_max,temperature_2m_min&'
                                                   f'timezone=Europe%2FMoscow&start_date={weather_date}&end_date={weather_date}')
         # If response return False, then requests fails, and we need to come back to the main menu
-        if weather_response is False:
+        if isinstance(weather_response, bool):
             return False
         # And we transform response to the json format
         weather_json = weather_response.json()
@@ -343,6 +343,26 @@ class UserChoose:
     # Because I did not create __init__ in this class I specified this method as static. In that case, we can do not
     # use self in the method variables
     @staticmethod
+    def user_menu_flag_checking(user_flag, correct_flag_tuple):
+
+        user_flag = user_flag.lower()
+
+        if user_flag == 'exit':
+            print('\nProgram was ended by user')
+            return 'exit'
+
+        while user_flag not in correct_flag_tuple:
+            print(f"\nYou enter incorrect command - {user_flag}. Please, use next possible "
+                  f"commands: {', '.join(correct_flag_tuple)}")
+            user_flag = input('\nPlease, re-write command. Exit - end program:\n')
+            user_flag = user_flag.lower()
+            if user_flag == 'exit':
+                print('\nProgram was ended by user')
+                return 'exit'
+        return user_flag
+
+
+    @staticmethod
     def news_type_choice():
         # In order to stay in the main menu I create while... statement while exit_flag is False we always will be in
         # the main menu. Even if some error will happen in API or file parsing. Variable exit_flag returns from all
@@ -351,42 +371,15 @@ class UserChoose:
         while exit_flag is False:
             # We ask user if he/she wants to overwrite file
             file_flag = input('\nDo you want to re-write the file? Yes/No. Exit - end program: \n')
-            file_flag = file_flag.lower()
-
-            # If user want to exit the program, we end our program by return
+            file_flag = UserChoose.user_menu_flag_checking(file_flag, ('yes', 'no'))
             if file_flag == 'exit':
-                print('Program was ended by user')
                 return 'Program was ended by user'
-
-            # If flag for re-writing is incorrect, we ask user to write flag once again
-            while file_flag not in ('yes', 'no'):
-                print(f'You enter incorrect command - {file_flag} - for file re-writing. Please, write Yes or No')
-                file_flag = input('Do you want to re-write the file? Yes/No Exit - end program: \n')
-                file_flag = file_flag.lower()
-                # User still able to exit program
-                if file_flag == 'exit':
-                    print('Program was ended by user')
-                    return 'Program was ended by user'
 
             # We ask user what type of Add he/she wants to write
             add_type = input('What type of Add do you want to write? News/Adv/Unique. Exit - end program: \n')
-            add_type = add_type.lower()
-
-            # User still able to exit program
+            add_type = UserChoose.user_menu_flag_checking(add_type, ('news', 'adv', 'unique'))
             if add_type == 'exit':
-                print('Program was ended by user')
                 return 'Program was ended by user'
-
-            # while flag for Add is incorrect, we ask user to re-write it
-            while add_type not in ('news', 'adv', 'unique'):
-                print(
-                    f'You enter incorrect command - {add_type} - for Add choosing. Please, write News or Adv or Unique')
-                add_type = input('What type of Add do you want to write? News/Adv/Unique. Exit - end program: \n')
-                add_type = add_type.lower()
-                # User still able to exit program
-                if add_type == 'exit':
-                    print('Program was ended by user')
-                    return 'Program was ended by user'
 
             # And then depending on flag we call classes
             if add_type == 'news':
