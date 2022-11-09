@@ -17,6 +17,8 @@ from module_7_CSV import CSV as csv_module_7
 from module_8_JSON import JSON as json_module_8
 # While Module_Files remains the main, I continue import classes to this file
 from module_9_XML import XML as xml_module_9
+# import method that insert rows to the sql table
+from module_10_Database_Api import Database_Api as database_module_10
 
 
 # All methods are in one class
@@ -149,13 +151,35 @@ class FileRecords:
                 print('\nProgram was ended by user')
                 return 'Program was ended by user'
 
+        # We ask user if he wants to drop all tables from the database
+        database_flag = input('\nDo you want to drop all tables from the database? Yes/No. Exit - end program\n')
+        database_flag = database_flag.lower()
+
+        if database_flag == 'exit':
+            print('\nProgram was ended by user')
+            return 'Program was ended by user'
+
+        # Logic of the menu is almost the same as in the 5 homework
+        while database_flag not in ('yes', 'no'):
+            print(f'You enter incorrect command - {database_flag} - for database re-writing. Please,'
+                  f' write Yes or No')
+            database_flag = input('Do you want to drop all tables from the database? Yes/No. Exit - end program\n')
+            database_flag = database_flag.lower()
+            if database_flag == 'exit':
+                print('\nProgram was ended by user')
+                return 'Program was ended by user'
+
+        # If user wants to drop tables then we drop them
+        if database_flag == 'yes':
+            database_module_10.DatabaseAPI().table_drop()
+
         if text_flag == 'console':
             Classes.UserChoose().news_type_choice()
             # After user write news by console, I call functions to count new words and letters
             csv_module_7.CsvParsing().word_count()
             csv_module_7.CsvParsing().letter_count()
-        elif text_flag == 'file':
 
+        elif text_flag == 'file':
             file_type_flag = input('\nDo you want to write news by .json, .txt or .xml? json/txt/xml. '
                                    'Exit - end program\n')
             file_type_flag = file_type_flag.lower()
@@ -269,6 +293,12 @@ class FileRecords:
                     if xml_file is False:
                         return False
                     xml_module_9.XMLRecords().text_xml_actions_write(file_flag, xml_file)
+
+        # I select data from all tables in the end of the program
+        print("\nBelow you will see rows from all tables in the database")
+        database_module_10.DatabaseAPI().table_select('news')
+        database_module_10.DatabaseAPI().table_select('adv')
+        database_module_10.DatabaseAPI().table_select('uniq')
 
 
 if __name__ == "__main__":

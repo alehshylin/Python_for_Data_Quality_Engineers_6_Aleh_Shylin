@@ -11,6 +11,7 @@ from module_5_Classes_OOP import Classes_OOP as Classes
 # import methods that count letters and words
 from module_7_CSV import CSV as csv_module_7
 
+
 # This class was imported to the file Module_Files. To work with class XMLRecords you need to execute file
 # Module_Files.py
 class XMLRecords:
@@ -136,7 +137,7 @@ class XMLRecords:
                                 xml_dict['adv_date'] = Classes.AdvAdd().date_module()
                             # after all we write adv to the newsfeed file
                             pointer = Classes.AdvAdd().message_module(file_flag, xml_dict['adv_text'],
-                                                                       xml_dict['adv_date'])
+                                                                      xml_dict['adv_date'])
                             flag_counter = 1
                             csv_module_7.CsvParsing().word_count()
                             csv_module_7.CsvParsing().letter_count()

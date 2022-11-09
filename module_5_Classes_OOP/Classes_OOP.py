@@ -12,7 +12,8 @@ import requests
 # about the street or city or country. More info you can find here https://geopy.readthedocs.io/en/stable/. I'll
 # describe usage of this class below in the code
 from geopy.geocoders import Nominatim
-
+# import module that write row to the sql tables
+from module_10_Database_Api import Database_Api as database_module_10
 
 
 # First class is for the News
@@ -110,6 +111,9 @@ class NewsAdd:
             exit_flag = NewsAdd().file_module(self.filename, 'w', file_text)
         # We return this variable to the main method news_type_choice() from UserChoose class. If exit_flag = True, then
         # we end program execution, if exit_flag = False, then program continue it's work
+        if exit_flag is not False:
+            # if news was written to the file, we add this news to the database
+            database_module_10.DatabaseAPI().table_write('news', text_message, text_city)
         return exit_flag
 
     # This method defines what News user want to write. After defying of user News and City, this method calls method
@@ -179,6 +183,9 @@ class AdvAdd(NewsAdd):
         else:
             exit_flag = NewsAdd().file_module(self.filename, 'w', file_text)
 
+        if exit_flag is not False:
+            # if news was written to the file, we add this news to the database
+            database_module_10.DatabaseAPI().table_write('adv', text_message, text_exp_date.strftime('%m/%d/%Y'))
         return exit_flag
 
     # As in the NewsAdd, this method defines what user want to write. But we overwrite this method as method ahead to
@@ -296,6 +303,9 @@ class UniqueAdd(NewsAdd):
         else:
             exit_flag = NewsAdd().file_module(self.filename, 'w', file_text)
 
+        if exit_flag is not False:
+            # if news was written to the file, we add this news to the database
+            database_module_10.DatabaseAPI().table_write('uniq', city_text, zodiac_sign_text)
         return exit_flag
 
     # As in the NewsAdd, this method defines what user want to write. But we overwrite this method as method ahead to

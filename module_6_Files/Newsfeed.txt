@@ -1,42 +1,40 @@
 News ----------------------------------------
-This is the text for the news from the xml file. Parsing of this file is completed in the module 9! 
-Vilnius, 10/27/2022 10.54 
----------------------------------------------
-
-
-Private ad ----------------------------------
-This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed 
-Actual until 12/12/2022, 46 days left 
----------------------------------------------
-
-
-News ----------------------------------------
-This is the text from non-default file. Mapping of this news is correct and text will be parsed. 
-Vilnius, 10/27/2022 10.55 
----------------------------------------------
-
-
-Private ad ----------------------------------
-This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed 
-Actual until 11/01/2022, 5 days left 
+This news was written from the console 
+Minsk, 11/09/2022 12.39 
 ---------------------------------------------
 
 
 News ----------------------------------------
 This is the text for the news from the json file. Parsing of this file is completed in the module 8! 
-Vilnius, 10/27/2022 10.55 
+Vilnius, 11/09/2022 12.40 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
 This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed. 
-Actual until 12/23/2022, 57 days left 
+Actual until 12/12/2022, 33 days left 
 ---------------------------------------------
 
 
 News ----------------------------------------
-Just random news from the console 
-Minsk, 10/27/2022 10.57 
+This is the first record for the news! 
+Vilnius, 11/09/2022 12.40 
+---------------------------------------------
+
+
+Private ad ----------------------------------
+And this is record for the advertisement. Want to sell smth? 
+Actual until 12/14/2022, 35 days left 
+---------------------------------------------
+
+
+News ----------------------------------------
+And this is strange record for the news.
+--With some strange formatting
+which should remains the same?
+-
+Exactly. 
+Minsk, 11/09/2022 12.41 
 ---------------------------------------------
 
 
