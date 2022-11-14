@@ -3,7 +3,7 @@
   [
     {
       "news_type": "news",
-      "news_text": "This is the text for the news from the json file. Parsing of ThiS File iS completed in The modUle 8!",
+      "news_text": "эТО is the text for the news from the json file. Parsing of ThiS File iS completed in The modUle 8!",
       "random_value": "random_key",
       "news_city": "Vilnius",
       "random_key": "random_value"

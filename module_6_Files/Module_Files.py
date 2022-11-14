@@ -70,7 +70,7 @@ class FileRecords:
             file_path = os.path.join(self.destination_path, file_name)
             # We try to open file and take from it text
             try:
-                with open(file_path, 'r') as news_file:
+                with open(file_path, 'r', encoding="utf-8") as news_file:
                     text_from_file = news_file.read()
                     # I define records (news) are divided by '-' symbol which is repeated 3 or more times
                     text_from_file_list = re.split(r'-{3,}', text_from_file)
@@ -122,10 +122,14 @@ class FileRecords:
                 if counter == 1:
                     file_flag = 'no'
                 date_text = Classes.AdvAdd().date_module()
+                if isinstance(date_text, bool):
+                    return False
                 while date_text <= datetime.today():
                     print(f"\nError: You entered date {date_text.strftime('%m/%d/%Y')} less or equal that today's "
                           f"date {datetime.today().strftime('%m/%d/%Y')}. Advertisement can be only with future dates.")
                     date_text = Classes.AdvAdd().date_module()
+                    if isinstance(date_text, bool):
+                        return False
                 pointer = Classes.AdvAdd().message_module(file_flag, text, date_text)
                 counter = 1
                 # After one news was parsed, I call functions to count new words and letters
@@ -249,10 +253,24 @@ class FileRecords:
                     xml_class.text_xml_actions_write(file_flag, xml_file)
 
         # I select data from all tables in the end of the program
-        print("\nBelow you will see rows from all tables in the database")
-        database_class.table_select('news')
-        database_class.table_select('adv')
-        database_class.table_select('uniq')
+        print("\nBelow you can select table from which you want to select data")
+        db_choose_flag = 'yes'
+        while db_choose_flag == 'yes':
+            db_flag = input('\nAvailable tables: news, adv, uniq. Exit - exit program\n')
+            db_flag = oop_classes.user_menu_flag_checking(db_flag, ('news', 'adv', 'uniq'))
+            if db_flag == 'news':
+                database_class.table_select('news')
+            elif db_flag == 'adv':
+                database_class.table_select('adv')
+            elif db_flag == 'uniq':
+                database_class.table_select('uniq')
+            elif db_flag == 'exit':
+                return False
+            else:
+                print('Error: incorrect flag name')
+                return False
+            db_choose_flag = input('\nDo you want to select from another tables? yes/no:')
+            db_choose_flag = oop_classes.user_menu_flag_checking(db_choose_flag, ('yes', 'no'))
 
 
 if __name__ == "__main__":

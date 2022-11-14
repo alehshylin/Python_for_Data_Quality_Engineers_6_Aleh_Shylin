@@ -40,7 +40,7 @@ class NewsAdd:
         while pointer is True:
             try:
                 # we try to open file
-                with open(text_file, open_flag) as AddFile:
+                with open(text_file, open_flag, encoding="utf-8") as AddFile:
                     AddFile.writelines(add_message)
                 pointer = False
             except OSError:

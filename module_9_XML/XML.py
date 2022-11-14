@@ -127,6 +127,8 @@ class XMLRecords:
                                 print(f"\nError: Incorrect data format for adv: \n{xml_dict['adv_text']}.\n"
                                       f"We will ask you to write new date")
                                 xml_dict['adv_date'] = Classes.AdvAdd().date_module()
+                                if isinstance(xml_dict['adv_date'], bool):
+                                    return False
                             # while date is less than today
                             while xml_dict['adv_date'] <= datetime.today():
                                 # we ask user to write new date
@@ -135,6 +137,8 @@ class XMLRecords:
                                     f"less or equal that today's date {datetime.today().strftime('%m/%d/%Y')}. "
                                     f"Advertisement can be only with future dates.")
                                 xml_dict['adv_date'] = Classes.AdvAdd().date_module()
+                                if isinstance(xml_dict['adv_date'], bool):
+                                    return False
                             # after all we write adv to the newsfeed file
                             pointer = Classes.AdvAdd().message_module(file_flag, xml_dict['adv_text'],
                                                                       xml_dict['adv_date'])

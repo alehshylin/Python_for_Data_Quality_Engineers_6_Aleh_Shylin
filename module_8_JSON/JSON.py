@@ -52,7 +52,7 @@ class JSONRecords:
             file_path = os.path.join(self.destination_path, file_name)
             # we try to load data
             try:
-                json_data = json.load(open(file_path))
+                json_data = json.load(open(file_path, encoding="utf-8"))
                 # if we succeed load data we delete file
                 os.remove(file_path)
                 # and return variable with json
@@ -112,12 +112,16 @@ class JSONRecords:
                                       f"{news_dict['adv_text']}\n "
                                       f"We will ask you to write new date.")
                                 news_dict['adv_date'] = Classes.AdvAdd().date_module()
+                                if isinstance(news_dict['adv_date'], bool):
+                                    return False
                             while news_dict['adv_date'] <= datetime.today():
                                 print(
                                     f"\nError: You entered date {news_dict['adv_date'].strftime('%m/%d/%Y')} "
                                     f"less or equal that today's date {datetime.today().strftime('%m/%d/%Y')}. "
                                     f"Advertisement can be only with future dates.")
                                 news_dict['adv_date'] = Classes.AdvAdd().date_module()
+                                if isinstance(news_dict['adv_date'], bool):
+                                    return False
                             pointer = Classes.AdvAdd().message_module(file_flag, news_dict['adv_text'],
                                                                       news_dict['adv_date'])
                             csv_module_7.CsvParsing().word_count()

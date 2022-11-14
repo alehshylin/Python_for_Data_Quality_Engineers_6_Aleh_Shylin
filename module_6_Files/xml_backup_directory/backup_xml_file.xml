@@ -1,7 +1,7 @@
 <newsfeed>
     <news_feed>
         <news_type>news</news_type>
-        <news_text>This is the text for the news from the xml file. Parsing of ThiS File iS completed in The modUle 9!</news_text>
+        <news_text>эТО is the text for the news from the xml file. Parsing of ThiS File iS completed in The modUle 9!</news_text>
         <random_key>random_value</random_key>
         <news_city>Vilnius</news_city>
         <random_value>random_key</random_value>

@@ -1,30 +1,24 @@
 News ----------------------------------------
-This news was written from the console 
-Minsk, 11/09/2022 12.39 
----------------------------------------------
-
-
-News ----------------------------------------
-This is the text for the news from the json file. Parsing of this file is completed in the module 8! 
-Vilnius, 11/09/2022 12.40 
+Это is the text for the news from the json file. Parsing of this file is completed in the module 8! 
+Vilnius, 11/14/2022 17.33 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
 This is the advertisement with key in the uppercase and wrong date. But anyway, this adv should be processed. 
-Actual until 12/12/2022, 33 days left 
+Actual until 12/12/2022, 28 days left 
 ---------------------------------------------
 
 
 News ----------------------------------------
 This is the first record for the news! 
-Vilnius, 11/09/2022 12.40 
+Минск, 11/14/2022 17.33 
 ---------------------------------------------
 
 
 Private ad ----------------------------------
-And this is record for the advertisement. Want to sell smth? 
-Actual until 12/14/2022, 35 days left 
+And это is record for the advertisement. Want to sell smth? 
+Actual until 12/12/2022, 28 days left 
 ---------------------------------------------
 
 
@@ -34,7 +28,7 @@ And this is strange record for the news.
 which should remains the same?
 -
 Exactly. 
-Minsk, 11/09/2022 12.41 
+Вильнюс, 11/14/2022 17.33 
 ---------------------------------------------
 
 

@@ -11,7 +11,7 @@ class CsvParsing:
         list_word = []
         # try to open newsfeed file
         try:
-            with open(newsfeed_file_path, 'r') as newsfeed_file:
+            with open(newsfeed_file_path, 'r', encoding="utf-8") as newsfeed_file:
                 # Read all from file
                 news_text = newsfeed_file.read()
                 # split all text by whitespace
@@ -19,9 +19,9 @@ class CsvParsing:
                 for text in news_text:
                     # delete words that not match the pattern (for example word abc--dce will be deleted because have
                     # 2 symbols '-')
-                    text = re.sub(r'[^a-zA-Z0-9_-]+|-{2,}', '', text)
+                    text = re.sub(r'[^a-zA-Z0-9а-яА-Я_-]+|-{2,}', '', text)
                     # if word matchs pattern
-                    if re.match(r'[a-zA-Z0-9_]+|[a-zA-Z0-9_]+-[a-zA-Z0-9_]+', text):
+                    if re.match(r'[a-zA-Z0-9а-яА-Я_]+|[a-zA-Z0-9а-яА-Я_]+-[a-zA-Z0-9а-яА-Я_]+', text):
                         # and if word is not full digit
                         if not text.isdigit():
                             # then we lower this word
@@ -44,7 +44,7 @@ class CsvParsing:
         # we try to open .csv file
         try:
             # with a newline as ''
-            with open('word_count.csv', 'w', newline='') as word_count_csv:
+            with open('word_count.csv', 'w', newline='', encoding="utf-8") as word_count_csv:
                 # create headers
                 headers = ['Word', 'Count']
                 # create writer
@@ -71,7 +71,7 @@ class CsvParsing:
         letter_count_upper_list = []
         # we try to open .csv file
         try:
-            with open(newsfeed_file_path, 'r') as newsfeed_file:
+            with open(newsfeed_file_path, 'r', encoding="utf-8") as newsfeed_file:
                 news_text = newsfeed_file.read()
                 # for each symbol in the text
                 for symbol in news_text:
@@ -108,11 +108,11 @@ class CsvParsing:
         letter_percentage_list = []
         for i in range(len(list_letter)):
             # as number of letter occurrence / all letters occurrence
-            letter_percentage_list.append(round(letter_count_all_list[i] / sum(letter_count_all_list), 3))
+            letter_percentage_list.append(round(letter_count_all_list[i] / sum(letter_count_all_list) * 100, 3))
 
         # we try to open .csv file
         try:
-            with open('letter_count.csv', 'w', newline='') as word_count_csv:
+            with open('letter_count.csv', 'w', newline='', encoding="utf-8") as word_count_csv:
                 # create headers
                 headers = ['Letter', 'Count_All', 'Count_Uppercase', 'Percentage']
                 # create writer
